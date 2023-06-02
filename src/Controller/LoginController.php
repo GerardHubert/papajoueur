@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function index(): Response
+    public function login(): Response
     {
         $user = new User();
 
         $loginForm = $this->createForm(LoginFormType::class, $user);
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('login/login.html.twig', [
             'loginform' => $loginForm,
         ]);
     }

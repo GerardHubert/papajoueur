@@ -19,8 +19,9 @@
   justify-content: center;
   align-items: center;
   margin-top: 20vh;
-  border-radius: 5px;
+  border-radius: 15px;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5)
 }
 
 .login-form-title {
@@ -110,4 +111,10 @@
 
 .login-form-submit:hover {
   cursor: pointer;
+}
+
+.login-form-email-input:focus,
+.login-form-password-input:focus {
+  background-color: white;
+  color: black
 }
