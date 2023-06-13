@@ -14,19 +14,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationController extends AbstractController
 {
+  public function __construct(private ValidatorInterface $validator)
+  {
+  }
+
   #[Route('/registration', name: 'app_registration')]
-  public function registration(Request $request, ValidatorInterface $validator, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+  public function registration(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
   {
     $user = new User();
     $user->setRoles(['ROLE_USER']); //default role at registration;
     $registrationForm = $this->createForm(RegistrationFormType::class, $user);
 
     $registrationForm->handleRequest($request);
-    $errors = $validator->validate($user);
+
+    $errors = $this->validation($user);
 
     if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
       // hash du mot de passe
@@ -46,5 +52,10 @@ class RegistrationController extends AbstractController
       'registration' => $registrationForm,
       'errors' => $errors
     ]);
+  }
+
+  public function validation(User $user)
+  {
+    return $this->validator->validate($user);
   }
 }

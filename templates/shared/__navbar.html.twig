@@ -12,10 +12,19 @@
 				<i class="fa-solid fa-video"></i>
 				<span>videos</span>
 			</div>
-			<a class="nav-item nav-item-login" href="{{path('app_login')}}">
-				<i class="fa-solid fa-user"></i>
-				<span>se connecter</span>
-			</a>
+			<div class="login-container">
+				{% if not app.user %}
+					<a class="nav-item nav-item-login" href="{{path('app_login')}}">
+						<i class="fa-solid fa-user"></i>
+						<span>se connecter</span>
+					</a>
+				{% else %}
+					<a class="nav-item nav-item-logout" href="{{path('app_logout')}}">
+						<i class="fa-solid fa-right-from-bracket"></i>
+						<span>{{app.user.email}}</span>
+					</a>
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </nav>

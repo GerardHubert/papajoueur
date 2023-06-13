@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,6 +42,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         message: 'Les mots de passe ne correspondent pas'
     )]
     private ?string $passwordConfirm = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $tokenCreatedAt = null;
 
     public function getId(): ?int
     {
@@ -120,6 +127,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPasswordConfirm(string $passwordConfirm): self
     {
         $this->passwordConfirm = $passwordConfirm;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->tokenCreatedAt;
+    }
+
+    public function setTokenCreatedAt(?\DateTimeInterface $tokenCreatedAt): self
+    {
+        $this->tokenCreatedAt = $tokenCreatedAt;
 
         return $this;
     }

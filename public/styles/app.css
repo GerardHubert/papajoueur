@@ -2,6 +2,8 @@
 @import "/styles/navbar.css";
 @import "/styles/login.css";
 @import "/styles/registration.css";
+@import "/styles/forgotten_password.css";
+@import "/styles/reset_password.css";
 
 body {
   margin: 0;
