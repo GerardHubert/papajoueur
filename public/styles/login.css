@@ -4,19 +4,13 @@
   display: flex;
   justify-content: space-around;
   font-family: 'JetBrains Mono', monospace;
-  /* background-image: url('/images/pixel-art-3.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed; */
   align-items: center;
-  background: #000046;
+  /* background: #000046; */
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+  /* background: -webkit-linear-gradient(to right, #1CB5E0, #000046); */
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #1CB5E0, #000046);
+  /* background: linear-gradient(to right, #1CB5E0, #000046); */
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
 
 .login-form-container {
@@ -28,8 +22,7 @@
   align-items: center;
   width: 350px;
   height: 40vh;
-  background-color: rgba(255, 255, 255, 0.30);
-  backdrop-filter: blur(10px);
+  background-color: rgba(36, 118, 255, 0.5);
 }
 
 .login-form {
@@ -71,6 +64,13 @@
   color: white
 }
 
+.login-username-input:focus,
+.login-password-input:focus {
+  border: 2px solid white;
+  background-color: #142a3b;
+  transition: 0.3s ease-in-out;
+}
+
 .login-user-icon,
 .login-password-icon {
   position: absolute;
@@ -92,6 +92,10 @@
 
 .login-form-submit:hover {
   cursor: pointer;
+  border: 2px solid white;
+  background-color: #142a3b;
+  transition: 0.3s ease-in-out;
+
 }
 
 .forgotten-pass-link,

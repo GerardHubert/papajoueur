@@ -9,7 +9,8 @@
 		<div class="registration-form-container">
 			<h1 class="registration-form-title">inscription</h1>
 			{{form_start(registration, { 'attr': {
-        'class': 'registration-form' }})}}
+        'class': 'registration-form',
+				 'enctype': "multipart/form-data" }})}}
 			{% if  errors is defined and errors is not empty %}
 				<div class="registration-form-errors">
 					{% for error in errors %}
