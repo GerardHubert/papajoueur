@@ -1,0 +1,84 @@
+.games-search-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-search-form-container {
+  border: 1px solid black;
+  height: 15vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-search-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-search-form-row {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-search-form-query-label {
+  display: none
+}
+
+.game-search-form-query-input {
+  height: 30px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px
+}
+
+.platform-select {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.game-search-submit {
+  height: 30px;
+}
+
+.game-search-submit:hover,
+.card-game:hover {
+  cursor: pointer;
+}
+
+.query-results-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.card-game {
+  width: 700px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.card-game-image {
+  min-width: 60%;
+  height: 90%;
+  margin-right: 15px;
+  margin-left: 5px;
+  border-radius: 5px
+}

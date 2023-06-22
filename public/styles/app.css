@@ -4,6 +4,9 @@
 @import "/styles/registration.css";
 @import "/styles/forgotten_password.css";
 @import "/styles/reset_password.css";
+@import "/styles/admin/unauthorized.css";
+@import "/styles/admin/dashboard.css";
+@import "/styles/admin/game_search.css";
 
 body {
   margin: 0;
@@ -15,9 +18,9 @@ body {
 .flash-message {
   width: 100%;
   height: 5vh;
-  position: absolute;
+  /* position: absolute;
   top: 8vh;
-  left: 0;
+  left: 0; */
   display: flex;
   justify-content: center;
   align-items: center;

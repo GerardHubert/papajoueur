@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Admin - Game Search
+{% endblock %}
+
+{% block body %}
+	<section class="game-search-section">
+		<h1 class="game-search-section-title">Rechercher un jeu</h1>
+		<div class="game-search-form-container">
+			<form method='post' action="{{path('app_admin_game_search')}}" class="game-search-form">
+				<div class="game-search-form-row">
+					<label class='game-search-form-query-label' for="query">Recherche:
+					</label>
+					<input type="text" name="query" id="query" class="game-search-form-query-input" placeholder='Rechercher un jeu depuis Rawg.io ici'>
+				</div>
+				<div class="platform-select">
+					<span>Plateforme:</span>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="ps4" value='18' checked>
+						<label for="ps4" class="checkbox-label">PS4</label>
+					</div>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="ps5" value='187'>
+						<label for="ps5" class="checkbox-label">PS5</label>
+					</div>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="series" value='186'>
+						<label for="series" class="checkbox-label">XBox Series</label>
+					</div>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="xboxone" value='1'>
+						<label for="xboxone" class="checkbox-label">XBox One</label>
+					</div>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="pc" value='4'>
+						<label for="pc" class="checkbox-label">PC</label>
+					</div>
+					<div class="checkbox-row">
+						<input type="radio" name="platform" id="switch" value='7'>
+						<label for="switch" class="checkbox-label">Switch</label>
+					</div>
+				</div>
+				<input type="hidden" name="token" value="{{ csrf_token('game-search') }}"/>
+				<button type="submit" class="game-search-submit">Rechercher</button>
+			</form>
+		</div>
+		{% if results is defined and results != null and results.success != false %}
+			<div class="query-results-container">
+				{% for game in games.results %}
+					<a href='#' class="card-game">
+						<img class='card-game-image' src="{{ game.background_image }}" alt="visuel de {{ game.name }}">
+						<div class="card-details">
+							<p class="game-title">{{ game.name }}</p>
+							<p class="platforms">
+								{% for platform in game.platforms %}
+									<span class='platform'>{{ platform.platform.name }}</span>
+								{% endfor %}
+							</p>
+							<p class="genres">
+								{% for genre in game.genres %}
+									<span class='platform'>{{ genre.name }}</span>
+								{% endfor %}
+							</p>
+							<p class="released-at">{{ game.released }}</p>
+							<p class="game-id">{{ game.id }}</p>
+						</div>
+					</ahref='#'>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</section>
+{% endblock %}

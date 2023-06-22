@@ -4,14 +4,33 @@
 			<img class="navbar-image" src="/images/gamepad_black.png" alt="gamepad icon">
 		</a>
 		<div class="nav-items-container">
-			<div class="nav-item">
+			<a href="#" class="nav-item">
 				<i class="fa-solid fa-pen"></i>
 				<span>reviews</span>
-			</div>
-			<div class="nav-item">
+			</a>
+			<a href="#" class="nav-item">
 				<i class="fa-solid fa-video"></i>
 				<span>videos</span>
-			</div>
+			</a>
+			{% if app.user %}
+				{% for role in app.user.roles %}
+					{% if role == 'ROLE_ADMIN' %}
+						<a href="#" class="nav-item">
+							<i class="fa-solid fa-screwdriver-wrench"></i>
+							<span>liste reviews</span>
+						</a>
+						<a href="{{ path('app_admin_game_search') }}" class="nav-item">
+							<i class="fa-solid fa-screwdriver-wrench"></i>
+							<span>nouvelle review</span>
+						</a>
+						<a href="#" class="nav-item">
+							<i class="fa-solid fa-comment"></i>
+							<span>modération</span>
+						</a>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
 			<div class="login-container">
 				{% if not app.user %}
 					<a class="nav-item nav-item-login" href="{{path('app_login')}}">
