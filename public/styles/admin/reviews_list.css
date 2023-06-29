@@ -1,0 +1,56 @@
+.dashboard-reviews-list-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-list-container {
+  width: 90%;
+}
+
+.table-row-header {
+  background-color: #2476ff;
+  color: white;
+}
+
+.review-row {
+  height: 35px;
+}
+
+.review-row:nth-child(odd) {
+  background-color: rgba(20, 42, 59, 0.4);
+}
+
+.review-row td {
+  text-align: center;
+}
+
+.review-id {
+  width: 5%
+}
+
+.review-game-title,
+.review-name {
+  width: 30%
+}
+
+.published-date {
+  width: 15%;
+}
+
+.review-delete,
+.review-update {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.reviews-list-button {
+  text-align: center;
+}

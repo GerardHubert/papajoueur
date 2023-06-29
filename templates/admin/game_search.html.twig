@@ -48,7 +48,7 @@
 		{% if results is defined and results != null and results.success != false %}
 			<div class="query-results-container">
 				{% for game in games.results %}
-					<a href='#' class="card-game">
+					<a href='{{ path('app_admin_review_new', {gameId: game.id}) }}' class="card-game">
 						<img class='card-game-image' src="{{ game.background_image }}" alt="visuel de {{ game.name }}">
 						<div class="card-details">
 							<p class="game-title">{{ game.name }}</p>
@@ -65,9 +65,13 @@
 							<p class="released-at">{{ game.released }}</p>
 							<p class="game-id">{{ game.id }}</p>
 						</div>
-					</ahref='#'>
+					</a>
 				{% endfor %}
 			</div>
 		{% endif %}
+		{% if results is defined and results != null and results.success != false and games.count == 0 %}
+			<p>Aucun jeu trouvé</p>
+		{% endif %}
+
 	</section>
 {% endblock %}

@@ -1,6 +1,6 @@
 <nav id="navbar" class='navbar'>
 	<div class="navbar-container">
-		<a class='nav-logo-link' href="#">
+		<a class='nav-logo-link' href="{{ path('app_home') }}">
 			<img class="navbar-image" src="/images/gamepad_black.png" alt="gamepad icon">
 		</a>
 		<div class="nav-items-container">
@@ -15,7 +15,7 @@
 			{% if app.user %}
 				{% for role in app.user.roles %}
 					{% if role == 'ROLE_ADMIN' %}
-						<a href="#" class="nav-item">
+						<a href="{{path('app_admin_reviews')}}" class="nav-item">
 							<i class="fa-solid fa-screwdriver-wrench"></i>
 							<span>liste reviews</span>
 						</a>

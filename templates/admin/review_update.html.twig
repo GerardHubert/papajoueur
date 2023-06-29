@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Review Update
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdn.tiny.cloud/1/97xujt63v02pi5q8baozxw48t8ryhh838n540l6bholq34p2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({selector: '#review-content'});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<section class="update-review-section">
+		<h1>modifier une review</h1>
+		<div class="update-review-container">
+			<form method='post' action="#" class="update-review-form">
+				<div class="update-review-titles-container">
+					<div class="update-review-row">
+						<label for="update-review-game-title" class="update-review-game-title">Titre du jeu</label>
+						<input disabled type="text" name="update-review-game-title" id="update-review-game-title" class="update-review-game-title" value='{{ review.game.name }}'>
+					</div>
+					<div class="update-review-row">
+						<label for="update-review-title" class="update-review-title">Titre de la review</label>
+						<input type="text" name="update-review-title" id="update-review-title" class="update-review-title" value='{{ review.title }}'>
+					</div>
+				</div>
+				<div class="update-review-content">
+					<label for="review-content" class="update-review-content">Contenu</label>
+					<textarea name="review-content" id="review-content" cols="30" rows="10" class="review-content">{{ review.content }}</textarea>
+				</div>
+				<input type="hidden" name="game-api-id" value="{{ review.game.apiId }}">
+				<input type="hidden" name="update-review-token" value="{{ csrf_token('update_review_token') }}">
+				<div class="update-review-submit-container">
+					<button type="submit" formaction='{{ path('app_admin_review_update', {'id': review.id}) }}' class='update-review-save'>Enregistrer les modifications</button>
+				</div>
+			</form>
+		</div>
+	</section>
+{% endblock %}

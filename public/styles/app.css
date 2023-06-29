@@ -5,8 +5,9 @@
 @import "/styles/forgotten_password.css";
 @import "/styles/reset_password.css";
 @import "/styles/admin/unauthorized.css";
-@import "/styles/admin/dashboard.css";
 @import "/styles/admin/game_search.css";
+@import "/styles/admin/new_review.css";
+@import "/styles/admin/reviews_list.css";
 
 body {
   margin: 0;

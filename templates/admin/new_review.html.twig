@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Nouvelle review
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdn.tiny.cloud/1/97xujt63v02pi5q8baozxw48t8ryhh838n540l6bholq34p2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+		tinymce.init({selector: '#review-content'});
+	</script>
+{% endblock %}
+
+{% block body %}
+	<section class="create-review-section">
+		<h1>Ajouter une nouvelle review</h1>
+		<div class="new-review-container">
+			<form method='post' action="#" class="new-review-form">
+				<div class="new-review-titles-container">
+					<div class="new-review-row">
+						<label for="new-review-game-title" class="new-review-game-title">Titre du jeu</label>
+						<input type="text" name="new-review-game-title" id="new-review-game-title" class="new-review-game-title" value='{{ game.name }}'>
+					</div>
+					<div class="new-review-row">
+						<label for="new-review-title" class="new-review-title">Titre de la review</label>
+						<input type="text" name="new-review-title" id="new-review-title" class="new-review-title">
+					</div>
+				</div>
+				<div class="new-review-content">
+					<label for="review-content" class="new-review-content">Contenu</label>
+					<textarea name="review-content" id="review-content" cols="30" rows="10" class="review-content"></textarea>
+				</div>
+				<input type="hidden" name="game-api-id" value="{{ game.apiId }}">
+				<input type="hidden" name="new-review-token" value="{{ csrf_token('new_review_token') }}">
+				<div class="new-review-submit-container">
+					<button type="submit" formaction='#' class='new-review-draft'>Enregistrer le brouillon</button>
+					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId}) }}" class='new-review-publish'>Publier la review</button>
+				</div>
+			</form>
+		</div>
+	</section>
+{% endblock %}

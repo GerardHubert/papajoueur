@@ -1,11 +1,40 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	Papajoueur - Admin
+	Papajoueur - Admin - Reviews
 {% endblock %}
 
 {% block body %}
-	<section class="dashboard-home-section">
-		<h1 class="admin-home-section-title">bienvenue sur l'espace administrateur</h1>
+	<section class="dashboard-reviews-list-section">
+		<h1 class="admin-home-section-title">espace administrateur - liste des reviews</h1>
+		<table class="reviews-list-container">
+			<tr class="table-row-header">
+				<th>Id</th>
+				<th>Jeu</th>
+				<th>Titre review</th>
+				<th>date de publication</th>
+				<th colspan='2'>actions</th>
+			</tr>
+			<tbody class='reviews-table-body'>
+				{% for review in reviews %}
+					<tr class="review-row">
+						<td class="review-id">{{ review.id }}</td>
+						<td class="review-game-title">{{ review.game.name }}</td>
+						<td class="review-title">{{ review.title }}</td>
+						<td class="published-date">{{ review.createdAt|date('d - m - y') }}</td>
+						<td class="reviews-list-button">
+							<a class='review-delete' href="{{ path('app_admin_review_delete', {'id': review.id}) }}">
+								Supprimer
+							</a>
+						</td>
+						<td class="reviews-list-button">
+							<a class='review-update' href="{{ path('app_admin_review_update', {'id': review.id}) }}">
+								Modifier
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</section>
 {% endblock %}
