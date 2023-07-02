@@ -83,6 +83,7 @@ class ReviewController extends AbstractController
   #[Route('/admin/review/new/{gameId}', name: 'app_admin_review_new')]
   public function createReview(int $gameId, QueryService $queryService, EntityManagerInterface $em, Request $request): Response
   {
+    $result = null;
     // récupération des données de jeu avec l'id
     $query = $queryService->findById($gameId, $_ENV['RAWG_API_KEY']);
     if ($query['game'] === false) {
@@ -120,14 +121,19 @@ class ReviewController extends AbstractController
   }
 
   #[Route('/admin/review/add/{gameId}', name: 'app_admin_review_add')]
-  public function addReview(Game $game, int $gameId, Request $request, EntityManagerInterface $em)
+  public function addReview(int $gameId, Request $request, EntityManagerInterface $em)
   {
+    /** @var GameRepository */
+    $gameRepo = $em->getRepository(Game::class);
+    $game = $gameRepo->findOneBy(['apiId' => $gameId]);
     $submittedToken = $request->request->get('new-review-token');
     if ($this->isCsrfTokenValid('new_review_token', $submittedToken) === false) {
       $this->addFlash('error', "Vous n'avez pas accès à cette page");
       return $this->redirectToRoute('app_admin_review_new', ['gameId' => $gameId]);
     }
 
+    $action = filter_var($request->query->get('action'), FILTER_SANITIZE_SPECIAL_CHARS);
+    $action === 'publish' ? $status = 'published' : $status = 'draft';
     $data = $request->request->all();
     $review = new Review;
 
@@ -136,9 +142,8 @@ class ReviewController extends AbstractController
       ->setContent($data['review-content'])
       ->setCreatedAt(new DateTime('now'))
       ->setGame($game)
-      ->setStatus('published')
+      ->setStatus($status)
       ->setTitle($data['new-review-title']);
-
     $em->persist($review);
     $em->flush();
 
@@ -154,14 +159,22 @@ class ReviewController extends AbstractController
       $data = $request->request->all();
 
       if ($this->isCsrfTokenValid('update_review_token', $data['update-review-token']) === false) {
-        $this->addFlash('error', "Vous n'ête pas autorisé à accéder à cette page");
+        $this->addFlash('error', "Vous n'êtes pas autorisé à accéder à cette page");
         return $this->redirectToRoute('app_admin_review_update', ['id' => $id]);
       };
 
       // modifier la review to update avec les données du formulaire
       $reviewToUpdate->setContent($data['review-content'])
         ->setTitle($data['update-review-title']);
-      // passer l'instance à la validation ? / optionnel
+
+      // s'il s'agit d'un brouillon et qu'on  le publie
+      if (key_exists('action', $request->query->all())) {
+        $param = filter_var($request->query->get('action'), FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($param === 'publish') {
+          $reviewToUpdate->setStatus('published');
+        }
+      }
+
       // mettre à jour la base de données
       $em->persist($reviewToUpdate);
       $em->flush();

@@ -34,6 +34,10 @@
 				<input type="hidden" name="update-review-token" value="{{ csrf_token('update_review_token') }}">
 				<div class="update-review-submit-container">
 					<button type="submit" formaction='{{ path('app_admin_review_update', {'id': review.id}) }}' class='update-review-save'>Enregistrer les modifications</button>
+					{% if review.status == 'draft' %}
+						<button type="submit" formaction='{{ path('app_admin_review_update', {'action': 'publish', 'id': review.id}) }}'>Enregistrer et publier</button>
+					{% endif %}
+
 				</div>
 			</form>
 		</div>

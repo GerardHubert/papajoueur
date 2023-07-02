@@ -6,7 +6,14 @@
 
 {% block body %}
 	<section class="dashboard-reviews-list-section">
-		<h1 class="admin-home-section-title">espace administrateur - liste des reviews</h1>
+
+		{% if 'reviews' in app.request.attributes.get('_route') %}
+			<h1 class="admin-home-section-title">espace administrateur - liste des reviews</h1>
+		{% else %}
+
+			<h1 class="admin-home-section-title">espace administrateur - liste des brouillons</h1>
+		{% endif %}
+
 		<table class="reviews-list-container">
 			<tr class="table-row-header">
 				<th>Id</th>

@@ -33,8 +33,8 @@
 				<input type="hidden" name="game-api-id" value="{{ game.apiId }}">
 				<input type="hidden" name="new-review-token" value="{{ csrf_token('new_review_token') }}">
 				<div class="new-review-submit-container">
-					<button type="submit" formaction='#' class='new-review-draft'>Enregistrer le brouillon</button>
-					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId}) }}" class='new-review-publish'>Publier la review</button>
+					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId, 'action': 'draft'}) }}" class='new-review-draft'>Enregistrer le brouillon</button>
+					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId, 'action': 'publish'}) }}" class='new-review-publish'>Publier la review</button>
 				</div>
 			</form>
 		</div>
