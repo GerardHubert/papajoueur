@@ -105,7 +105,8 @@ class ReviewController extends AbstractController
         ->setName($result['name'])
         ->setReleasedAt(new DateTime($result['released']))
         ->setDevelopers($result['developers'])
-        ->setPlatforms($result['platforms']);
+        ->setPlatforms($result['platforms'])
+        ->setImage($result['background_image']);
       $em->persist($game);
       $em->flush();
     }

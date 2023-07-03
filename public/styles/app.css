@@ -8,6 +8,7 @@
 @import "/styles/admin/game_search.css";
 @import "/styles/admin/new_review.css";
 @import "/styles/admin/reviews_list.css";
+@import "/styles/one_review.css";
 
 body {
   margin: 0;

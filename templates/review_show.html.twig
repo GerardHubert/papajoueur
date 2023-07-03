@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Lire une review
+{% endblock %}
+
+{% block body %}
+	<section class="one-review-section">
+		<header class="review-header">
+			<img src="{{ review.game.image }}" alt="{{ review.game.name }}" class="review-header-image">
+			<h1 class='review-title'>{{ review.title }}</h1>
+		</header>
+		<div class="review-container">
+			<main class="review-content">
+				<iframe class='youtube-player' src="https://www.youtube.com/embed/4z1iSpJKljY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				<div class="review-text">
+					{{review.content|raw}}
+				</div>
+			</main>
+			<aside class="game-information">
+				<div class="game-information-container">
+					<h2 class="aside-game-title">{{ review.game.name }}</h2>
+					<div class='developers-information'>
+						<h4 class='game-info-subtitle'>developpeurs</h4>
+						{% for developer in review.game.developers %}
+							<span>{{ developer.name }}</span><br>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class='release-information'>
+						<h4 class='game-info-subtitle'>date de sortie</h4>
+						<span>{{ review.game.releasedAt|date('d/m/Y') }}</span>
+					</div>
+					<hr>
+					<div class='platforms-information'>
+						<h4 class='game-info-subtitle'>plateforme(s)</h4>
+						<div class="platforms-container">
+							{% for platform in review.game.platforms %}
+								<span class="badge badge-platform">{{ platform.platform.name }}</span>
+							{% endfor %}
+						</div>
+					</div>
+					<hr>
+					<div class='genres-information'>
+						<h4 class='game-info-subtitle'>genre(s)</h4>
+						<div class="genres-container">
+							{% for genre in review.game.genres %}
+								<span class="badge badge-genre">{{ genre.name }}</span>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</section>
+{% endblock %}

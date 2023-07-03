@@ -40,6 +40,9 @@ class Game
     #[ORM\OneToMany(mappedBy: 'game', targetEntity: Review::class)]
     private Collection $reviews;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -148,6 +151,18 @@ class Game
                 $review->setGame(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
