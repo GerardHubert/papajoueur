@@ -136,6 +136,7 @@ class ReviewController extends AbstractController
     $action = filter_var($request->query->get('action'), FILTER_SANITIZE_SPECIAL_CHARS);
     $action === 'publish' ? $status = 'published' : $status = 'draft';
     $data = $request->request->all();
+    dump($data, $data['new-review-good']);
     $review = new Review;
 
     $review->setApiGameId((int) $data['game-api-id'])
@@ -144,7 +145,11 @@ class ReviewController extends AbstractController
       ->setCreatedAt(new DateTime('now'))
       ->setGame($game)
       ->setStatus($status)
-      ->setTitle($data['new-review-title']);
+      ->setTitle($data['new-review-title'])
+      ->setGood($data['new-review-good'])
+      ->setBad($data['new-review-bad'])
+      ->setSummary($data['new-review-summary']);
+    dd($review);
     $em->persist($review);
     $em->flush();
 

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&family=JetBrains+Mono:wght@200;300&family=Sigmar+One&family=Special+Elite&display=swap');
 @import "/styles/navbar.css";
+@import "/styles/admin/new_review.css";
 @import "/styles/login.css";
 @import "/styles/registration.css";
 @import "/styles/forgotten_password.css";
 @import "/styles/reset_password.css";
 @import "/styles/admin/unauthorized.css";
 @import "/styles/admin/game_search.css";
-@import "/styles/admin/new_review.css";
 @import "/styles/admin/reviews_list.css";
 @import "/styles/one_review.css";
 

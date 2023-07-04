@@ -36,6 +36,15 @@ class Review
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?User $author = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $summary = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $good = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $bad = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +130,42 @@ class Review
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getGood(): ?string
+    {
+        return $this->good;
+    }
+
+    public function setGood(?string $good): self
+    {
+        $this->good = $good;
+
+        return $this;
+    }
+
+    public function getBad(): ?string
+    {
+        return $this->bad;
+    }
+
+    public function setBad(?string $bad): self
+    {
+        $this->bad = $bad;
 
         return $this;
     }

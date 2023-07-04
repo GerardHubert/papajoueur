@@ -16,6 +16,7 @@
 .new-review-form,
 .update-review-form {
   width: 90%;
+  margin-bottom: 25px;
 }
 
 .new-review-titles-container,
@@ -54,4 +55,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.new-review-summary-wrapper {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-review-bad-container,
+.new-review-good-container,
+.new-review-summary-container {
+  width: 32%;
 }

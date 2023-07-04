@@ -8,6 +8,9 @@
 	<script src="https://cdn.tiny.cloud/1/97xujt63v02pi5q8baozxw48t8ryhh838n540l6bholq34p2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
 		tinymce.init({selector: '#review-content'});
+tinymce.init({selector: '#new-review-good', plugins: 'lists', toolbar: 'numlist bullist'});
+tinymce.init({selector: '#new-review-bad', plugins: 'lists', toolbar: 'numlist bullist'});
+tinymce.init({selector: '#new-review-summary'});
 	</script>
 {% endblock %}
 
@@ -29,6 +32,20 @@
 				<div class="update-review-content">
 					<label for="review-content" class="update-review-content">Contenu</label>
 					<textarea name="review-content" id="review-content" cols="30" rows="10" class="review-content">{{ review.content }}</textarea>
+					<div class="new-review-summary-wrapper">
+						<div class="new-review-good-container">
+							<label for="new-review-good" class='new-review-good-label'>j'ai aimé</label>
+							<textarea name="new-review-good" id="new-review-good" cols="30" rows="10"></textarea>
+						</div>
+						<div class="new-review-bad-container">
+							<label for="new-review-bad" class='new-review-bad-label'>j'ai moins aimé</label>
+							<textarea name="new-review-bad" id="new-review-bad" cols="30" rows="10"></textarea>
+						</div>
+						<div class="new-review-summary-container">
+							<label for="new-review-summary" class='new-review-summary-label'>résumé</label>
+							<textarea name="new-review-summary" id="new-review-summary" cols="30" rows="10"></textarea>
+						</div>
+					</div>
 				</div>
 				<input type="hidden" name="game-api-id" value="{{ review.game.apiId }}">
 				<input type="hidden" name="update-review-token" value="{{ csrf_token('update_review_token') }}">
@@ -37,7 +54,6 @@
 					{% if review.status == 'draft' %}
 						<button type="submit" formaction='{{ path('app_admin_review_update', {'action': 'publish', 'id': review.id}) }}'>Enregistrer et publier</button>
 					{% endif %}
-
 				</div>
 			</form>
 		</div>
