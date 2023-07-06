@@ -35,20 +35,28 @@ tinymce.init({selector: '#new-review-summary'});
 					<div class="new-review-summary-wrapper">
 						<div class="new-review-good-container">
 							<label for="new-review-good" class='new-review-good-label'>j'ai aimé</label>
-							<textarea name="new-review-good" id="new-review-good" cols="30" rows="10"></textarea>
+							<textarea name="new-review-good" id="new-review-good" cols="30" rows="10">{{ review.good }}</textarea>
 						</div>
 						<div class="new-review-bad-container">
 							<label for="new-review-bad" class='new-review-bad-label'>j'ai moins aimé</label>
-							<textarea name="new-review-bad" id="new-review-bad" cols="30" rows="10"></textarea>
+							<textarea name="new-review-bad" id="new-review-bad" cols="30" rows="10">{{ review.bad }}</textarea>
 						</div>
 						<div class="new-review-summary-container">
 							<label for="new-review-summary" class='new-review-summary-label'>résumé</label>
-							<textarea name="new-review-summary" id="new-review-summary" cols="30" rows="10"></textarea>
+							<textarea name="new-review-summary" id="new-review-summary" cols="30" rows="10">{{ review.summary }}</textarea>
 						</div>
 					</div>
 				</div>
 				<input type="hidden" name="game-api-id" value="{{ review.game.apiId }}">
 				<input type="hidden" name="update-review-token" value="{{ csrf_token('update_review_token') }}">
+				<label class="new-review-opinion" for="new-review-opinion">avis (smiley)</label>
+				<select name="new-review-opinion" id="new-review-opinion" class="opinion-select">
+					<option value="/images/smileys/excellent.png">Excellent</option>
+					<option value="/images/smileys/good.png">Bien</option>
+					<option value="/images/smileys/bof.png">Moyen</option>
+					<option value="/images/smileys/bad.png">Mauvais</option>
+					<option value="/images/smileys/angry.png">A fuir !</option>
+				</select>
 				<div class="update-review-submit-container">
 					<button type="submit" formaction='{{ path('app_admin_review_update', {'id': review.id}) }}' class='update-review-save'>Enregistrer les modifications</button>
 					{% if review.status == 'draft' %}

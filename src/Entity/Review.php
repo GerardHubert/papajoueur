@@ -39,11 +39,14 @@ class Review
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $summary = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $good = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bad = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $smiley = null;
 
     public function getId(): ?int
     {
@@ -166,6 +169,18 @@ class Review
     public function setBad(?string $bad): self
     {
         $this->bad = $bad;
+
+        return $this;
+    }
+
+    public function getSmiley(): ?string
+    {
+        return $this->smiley;
+    }
+
+    public function setSmiley(?string $smiley): self
+    {
+        $this->smiley = $smiley;
 
         return $this;
     }

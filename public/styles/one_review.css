@@ -6,6 +6,7 @@
 
 .review-header {
   width: 1200px;
+  height: 600px;
   margin: 0;
   padding: 0;
   position: relative;
@@ -14,6 +15,31 @@
 .review-header-image {
   width: 100%;
   min-width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.show-review-summary {
+  width: 400px;
+  height: 250px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 150px;
+  right: 50px;
+  font-size: 0.9em;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.show-review-summary-title {
+  text-align: center;
+}
+
+.show-review-summary-smiley {
+  position: absolute;
+  right: -48px;
+  top: -48px;
 }
 
 .show-review-title {
@@ -96,4 +122,48 @@
 
 .badge-genre {
   background-color: #0cb04a;
+}
+
+.review-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-bottom-good-container,
+.review-bottom-bad-container {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  height: 380px;
+  border-radius: 5px;
+  background-color: rgba(36, 118, 255, 0.4);
+}
+
+.review-bottom-good>ul>li::marker,
+.review-bottom-bad>ul>li::marker {
+  font-size: 1.5em;
+}
+
+.review-bottom-good>ul>li::marker,
+.review-good-smile {
+  color: #0cb04a
+}
+
+.review-bottom-bad>ul>li::marker,
+.review-good-angry {
+  color: #ff312a
+}
+
+.review-good-angry,
+.review-good-smile {
+  font-size: 4em;
+  align-self: center;
+  margin-top: 10px;
+}
+
+
+.review-bottom-good>ul>li,
+.review-bottom-bad>ul>li {
+  margin-bottom: 5px
 }

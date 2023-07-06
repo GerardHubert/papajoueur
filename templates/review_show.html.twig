@@ -8,6 +8,11 @@
 	<section class="one-review-section">
 		<header class="review-header">
 			<img src="{{ review.game.image }}" alt="{{ review.game.name }}" class="review-header-image">
+			<div class="show-review-summary">
+				<img class='show-review-summary-smiley' src="{{ review.smiley }}" alt="avis sur le jeu">
+				<h3 class="show-review-summary-title">En résumé</h3>
+				<p class='show-review-summary-summary'>{{ review.summary|raw }}</p>
+			</div>
 			<h1 class='show-review-title'>{{ review.title }}</h1>
 		</header>
 		<div class="review-container">
@@ -15,6 +20,16 @@
 				<iframe class='youtube-player' src="https://www.youtube.com/embed/6jnWzmiOMzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 				<div class="review-text">
 					{{review.content|raw}}
+				</div>
+				<div class="review-bottom">
+					<div class="review-bottom-good-container">
+						<i class="fa-regular fa-face-smile review-good-smile"></i>
+						<div class="review-bottom-good">{{ review.good|raw }}</div>
+					</div>
+					<div class="review-bottom-bad-container">
+						<i class="fa-regular fa-face-angry review-good-angry"></i>
+						<div class="review-bottom-bad">{{ review.bad|raw }}</div>
+					</div>
 				</div>
 			</main>
 			<aside class="game-information">
