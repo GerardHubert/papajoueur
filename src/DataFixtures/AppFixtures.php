@@ -81,8 +81,10 @@ class AppFixtures extends Fixture
                     ->setName($result['name'])
                     ->setReleasedAt(new DateTime($result['released']))
                     ->setDevelopers($result['developers'])
-                    ->setPlatforms($result['platforms'])
-                    ->setImage($result['background_image']);
+                    ->setPlatforms($result['platforms']);
+                $result['background-image'] === null ? $game->setImage('/images/review_default.jpg') : $game->setImage($result['background-image']);
+                $manager->persist($game);
+                dump('jeu créé !: ' . $game->getName());
 
                 $review = new Review;
                 $review->setApiGameId($game->getApiId())
@@ -94,9 +96,7 @@ class AppFixtures extends Fixture
                     ->setTitle($faker->text(15))
                     ->setSummary($faker->text(25));
 
-                $manager->persist($game);
                 $manager->persist($review);
-                dump('game créé !: ' . $game->getName());
                 dump('review créée!: ' . $review->getTitle());
             }
         }

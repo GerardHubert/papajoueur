@@ -93,7 +93,6 @@ class ReviewController extends AbstractController
 
     // si la requête se passe bien, on enregistre une nouvelle entité Game
     $result = json_decode($query['game'], true);
-
     // vérifier si le jeu existe déjà dans la bdd
     /** @var GameRepository */
     $gameRepo = $em->getRepository(Game::class);
@@ -105,8 +104,10 @@ class ReviewController extends AbstractController
         ->setName($result['name'])
         ->setReleasedAt(new DateTime($result['released']))
         ->setDevelopers($result['developers'])
-        ->setPlatforms($result['platforms'])
-        ->setImage($result['background_image']);
+        ->setPlatforms($result['platforms']);
+      if ($result['background_image'] === null) {
+        $game->setImage('images/review_default.jpg');
+      };
       $em->persist($game);
       $em->flush();
     }

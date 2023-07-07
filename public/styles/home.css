@@ -1,0 +1,75 @@
+.home-section {
+  width: 100%;
+}
+
+.home-section-header {
+  width: 100%;
+  height: 300px;
+  background-color: rgb(20, 42, 59);
+  color: white;
+}
+
+.home-section-main-container {
+  width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black
+}
+
+.home-section-main {
+  width: 800px;
+}
+
+.review-card-container {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  background-color: limegreen;
+}
+
+.review-card-thumbnail {
+  width: 300px;
+  min-width: 300px;
+  height: 200px;
+  min-height: 200px;
+  align-self: center;
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.review-card-glimpse {
+  height: 70%;
+  width: 490px;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative
+}
+
+.review-card-smiley {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 5px;
+  top: -35px;
+}
+
+.home-section-aside {
+  width: 380px;
+  background-color: orange;
+}
+
+.aside-avatar-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}

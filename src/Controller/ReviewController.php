@@ -15,7 +15,6 @@ class ReviewController extends AbstractController
   #[Route('/review/{id}', name: 'app_review_show_one')]
   public function showOneReview(Review $review): Response
   {
-    dump($review->getGame()->getGenres());
     return $this->render('review_show.html.twig', [
       'review' => $review
     ]);

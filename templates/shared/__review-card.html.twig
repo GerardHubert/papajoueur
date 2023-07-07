@@ -1,0 +1,14 @@
+<a href='{{ path('app_review_show_one', {'id': review.id}) }}' class="review-card-container">
+	<img src="{{review.game.image}}" alt="thumbnail" class="review-card-thumbnail">
+	<div class="review-card-glimpse">
+		<img class="review-card-smiley" src="{{ review.smiley }}" alt="avis sur le jeu">
+		<p class="review-card-titles">{{review.game.name}}
+			:
+			{{review.title}}</p>
+		<div class="review-card-platforms"></div>
+		<p class="review-card-extract">
+			{{ review.content|slice(0, 150)|raw }}...
+		</p>
+		<p class="review-card-publication-date">{{ review.createdAt|date('d-m-Y') }}</p>
+	</div>
+</a>

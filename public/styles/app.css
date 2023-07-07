@@ -10,6 +10,7 @@
 @import "/styles/admin/game_search.css";
 @import "/styles/admin/reviews_list.css";
 @import "/styles/one_review.css";
+@import "/styles/home.css";
 
 body {
   margin: 0;
