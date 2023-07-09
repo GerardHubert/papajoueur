@@ -1,5 +1,8 @@
 .home-section {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-section-header {
@@ -14,7 +17,6 @@
   margin: auto;
   display: flex;
   justify-content: space-between;
-  border: 1px solid black
 }
 
 .home-section-main {
@@ -30,7 +32,7 @@
   border-radius: 5px;
   text-decoration: none;
   color: black;
-  background-color: limegreen;
+  background-color: rgba(20, 42, 59, 0.1);
 }
 
 .review-card-thumbnail {
@@ -54,6 +56,10 @@
   position: relative
 }
 
+.review-card-titles {
+  width: 85%;
+}
+
 .review-card-smiley {
   width: 50px;
   height: 50px;
@@ -65,11 +71,33 @@
 
 .home-section-aside {
   width: 380px;
-  background-color: orange;
+  background-color: rgba(20, 42, 59, 0.1);
+  border-radius: 5px;
+}
+
+.home-aside-container {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .aside-avatar-image {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+}
+
+.aside-introduction {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.review-card-platforms {
+  width: 100%;
+  height: 25px;
+  display: flex;
 }

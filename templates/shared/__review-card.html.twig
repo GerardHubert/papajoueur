@@ -5,10 +5,15 @@
 		<p class="review-card-titles">{{review.game.name}}
 			:
 			{{review.title}}</p>
-		<div class="review-card-platforms"></div>
+		<div class="review-card-platforms">
+			{% for platform in review.game.platforms %}
+				<span class="badge badge-platform">{{ platform.platform.name }}</span>
+			{% endfor %}
+		</div>
 		<p class="review-card-extract">
 			{{ review.content|slice(0, 150)|raw }}...
 		</p>
-		<p class="review-card-publication-date">{{ review.createdAt|date('d-m-Y') }}</p>
+		<p class="review-card-publication-date">Publié le
+			{{ review.createdAt|date('d-m-Y') }}</p>
 	</div>
 </a>
