@@ -11,6 +11,7 @@
 @import "/styles/admin/reviews_list.css";
 @import "/styles/one_review.css";
 @import "/styles/home.css";
+@import "/styles/error403.css";
 
 body {
   margin: 0;

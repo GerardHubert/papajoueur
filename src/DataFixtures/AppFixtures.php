@@ -30,8 +30,8 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $admin = new User();
-        $admin->setEmail("mikado842@gmail.com")
-            ->setPassword($this->hasher->hashPassword($admin, 'papajoueur!2023'))
+        $admin->setEmail("admin@papajoueur.fr")
+            ->setPassword($this->hasher->hashPassword($admin, 'password'))
             ->setPasswordConfirm($admin->getPassword())
             ->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
                     ->setReleasedAt(new DateTime($result['released']))
                     ->setDevelopers($result['developers'])
                     ->setPlatforms($result['platforms']);
-                $result['background-image'] === null ? $game->setImage('/images/review_default.jpg') : $game->setImage($result['background-image']);
+                $result['background_image'] === null ? $game->setImage('/images/review_default.jpg') : $game->setImage($result['background_image']);
                 $manager->persist($game);
                 dump('jeu créé !: ' . $game->getName());
 

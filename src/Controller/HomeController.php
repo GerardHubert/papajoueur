@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-  // La page d'accueil affiche les X derniers posts
+  // La page d'accueil affiche les 10 derniers posts
   #[Route('/', name: 'app_home')]
   public function home(EntityManagerInterface $em): Response
   {

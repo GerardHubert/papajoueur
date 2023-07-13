@@ -1,0 +1,13 @@
+.unauthorized-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unauthorized-message-container {
+  height: 250px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
