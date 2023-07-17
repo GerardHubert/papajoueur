@@ -42,6 +42,9 @@
 						<span>se connecter</span>
 					</a>
 				{% else %}
+					<a class='navbar-avatar-wrapper' href="#">
+						<img class='navbar-user-avatar' src="{{app.user.avatar}}" alt="user avatar">
+					</a>
 					<a class="nav-item nav-item-logout" href="{{path('app_logout')}}">
 						<i class="fa-solid fa-right-from-bracket"></i>
 						<span>{{app.user.email}}</span>

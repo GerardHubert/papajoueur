@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Services\FileUploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,10 +36,25 @@ class RegistrationController extends AbstractController
     $errors = $this->validation($user);
 
     if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+
       // hash du mot de passe
       $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
       // suppression de la confirmation du mot de passe
       $user->setPasswordConfirm('');
+
+      // si l'utilisateur n'envoie aucun fichier, on attribue un avatar par défaut
+      if ($_FILES['file']['error'] === 4) {
+        $user->setAvatar('images/default_user.png');
+        // sinon, on gère l'upload d'une image en avatar
+      } else {
+        try {
+          $upload = FileUploadService::avatarUpload($_FILES['file']);
+          $user->setAvatar($upload[1]);
+        } catch (\Throwable $exc) {
+          $this->addFlash('error', $exc->getMessage());
+          return $this->redirectToRoute('app_registration');
+        }
+      }
 
       $entityManager->persist($user);
       $entityManager->flush();

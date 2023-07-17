@@ -92,7 +92,7 @@ class ReviewControllerTest extends WebTestCase
         return array_rand($randomInt, 1);
     }
 
-    public function testRedirectionIfNoUserLLogged(): void
+    public function testRedirectionIfNoUserLogged(): void
     {
         $client = static::createClient();
         $client->request('GET', '/admin/game_search');
@@ -168,14 +168,14 @@ class ReviewControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/admin/review/new/' . $gameId);
 
-        // select the button
+        // select the button of the form
         $button = $crawler->selectButton('Publier la review');
 
         // retrieve the Form object for the form belonging to this button
         $form = $button->form();
 
         // set values on a form object
-        $form['new-review-title'] = 'Un nouveau titre de review au hasard';
+        $form['new-review-title'] = 'Publié : ' . uniqid();
         $form['review-content'] = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis dolor consectetur aliquid molestiae necessitatibus quis suscipit eum non accusamus officia.";
         $form['new-review-good'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus sit amet dolor eu erat dignissim mattis vehicula a erat.
@@ -221,7 +221,7 @@ class ReviewControllerTest extends WebTestCase
         $form = $button->form();
 
         // set values on a form object
-        $form['new-review-title'] = 'Un nouveau titre de review au hasard version brouillon';
+        $form['new-review-title'] = 'Brouillon : ' . uniqid();
         $form['review-content'] = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis dolor consectetur aliquid molestiae necessitatibus quis suscipit eum non accusamus officia.";
         $form['new-review-good'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus sit amet dolor eu erat dignissim mattis vehicula a erat.

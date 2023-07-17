@@ -112,3 +112,8 @@
   background-color: #142a3b;
   transition: 0.3s linear
 }
+
+.registration-avatar-label {
+  font-size: 0.9em;
+  font-weight: bold;
+}

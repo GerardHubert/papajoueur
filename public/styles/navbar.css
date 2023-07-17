@@ -53,10 +53,10 @@
 }
 
 .login-container {
-  width: 200px;
+  width: 350px;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   position: absolute;
   right: 0;
@@ -64,7 +64,18 @@
 
 .nav-item-login,
 .nav-item-logout {
-  width: 100%;
+  width: 200px;
   text-decoration: none;
   color: black;
+}
+
+.navbar-avatar-wrapper {
+  height: 90%;
+  width: 100px;
+}
+
+.navbar-user-avatar {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
 }
