@@ -6,9 +6,16 @@
 			:
 			{{review.title}}</p>
 		<div class="review-card-platforms">
-			{% for platform in review.game.platforms %}
-				<span class="badge badge-platform">{{ platform.platform.name }}</span>
-			{% endfor %}
+			{% if review.game.platforms|length > 5 %}
+				{% for platform in review.game.platforms|slice(0, 5) %}
+					<span class="badge badge-platform">{{ platform.platform.name }}</span>
+				{% endfor %}
+				<span>...</span>
+			{% else %}
+				{% for platform in review.game.platforms %}
+					<span class="badge badge-platform">{{ platform.platform.name }}</span>
+				{% endfor %}
+			{% endif %}
 		</div>
 		<p class="review-card-extract">
 			{{ review.content|slice(0, 150)|raw }}...

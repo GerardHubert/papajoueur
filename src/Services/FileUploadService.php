@@ -26,21 +26,21 @@ class FileUploadService
     $types = ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'];
 
     // vérification que l'image a bien été uploadée
-    if (!is_uploaded_file($file['tmp_name'])) {
-      // vérification de la taille
-      if ($file['error'] === 1) {
-        throw new Exception("Le fichier est trop volumineux (taille max 2Mo)");
-        return false;
-      }
-      throw new Exception("un problème est survenu lors de l'upload.");
-      return false;
+    // si rien dans le dossier temporaire
+    // if (!is_uploaded_file($file['tmp_name'])) {
+    // vérification de la taille
+    if ($file['error'] === 1 || $file['error'] === 2 || $file['size'] > $maxSize) {
+      throw new Exception("Le fichier est trop volumineux (taille max 2Mo)");
     }
+    if ($file['error'] > 0 && $file['error'] !== 1 && $file['error'] !== 2) {
+      throw new Exception("un problème est survenu lors de l'upload. Error = " . $file['error']);
+    }
+    //}
 
     // vérification de double extensions
     $testFileName = explode('.', strtolower($file['name']));
     if (count($testFileName) !== 2) {
       throw new Exception("Danger : risque de double extension !");
-      return false;
     }
 
     // vérification que l'extension est autorisée
@@ -52,7 +52,6 @@ class FileUploadService
     // vérification du type
     if (!in_array($file['type'], $types)) {
       throw new Exception("Le type n'est pas autorisé");
-      return false;
     }
 
     // si tous les tests sont passés, on attribue un nom unique à l'image
@@ -62,7 +61,6 @@ class FileUploadService
     // puis on peut l'uploader
     if (move_uploaded_file($file['tmp_name'], $fullName) === false) {
       throw new Exception("Le fichier n'a pas pu être uploadé, merci de réessayer");
-      return false;
     } else {
       return [true, $fullName];
     };

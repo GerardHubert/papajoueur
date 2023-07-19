@@ -5,9 +5,11 @@ namespace App\Tests\Controller;
 use App\Controller\RegistrationController;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Form;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class RegistrationTest extends WebTestCase
 {
@@ -18,7 +20,7 @@ class RegistrationTest extends WebTestCase
          */
         $userRepo = static::getContainer()->get(UserRepository::class);
         $users = $userRepo->findAll();
-        $email = "test-user" . count($users) . "@papunit.fr";
+        $email = "test-user" . count($users) . "@phpunit.fr";
         return $email;
     }
 
@@ -39,21 +41,24 @@ class RegistrationTest extends WebTestCase
      *
      * @return void
      */
-    public function testNewUserIsRegistered(): void
+    public function testNewUserIsRegisteredWithDefaultAvatar(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/registration');
-
+        $client->catchExceptions(false);
         /** @var UserRepository */
         $userRepo = static::getContainer()->get(UserRepository::class);
-        $initialUsersList = $userRepo->findAll();
+        $initialUsers = $userRepo->findAll();
 
-        $client->submit($this->generateRegistrationForm($crawler));
+        $client->followRedirects();
+        $crawler = $client->request('GET', '/registration');
 
-        $updatedUsersList = $userRepo->findAll();
+        $form = $this->generateRegistrationForm($crawler);
+        $client->submit($form);
 
-        $this->assertTrue(count($initialUsersList) < count($updatedUsersList));
-        $this->assertResponseRedirects('/login', 302, 'redirection après enregistrement réussie');
+        $updatedUsers = $userRepo->findAll();
+
+        $this->assertTrue(count($initialUsers) < count($updatedUsers));
+        $this->assertPageTitleContains('Login');
     }
 
     public function testNoRegistrationIfPasswordsAreDifferent(): void

@@ -18,6 +18,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+use function PHPUnit\Framework\isEmpty;
+
 class RegistrationController extends AbstractController
 {
   public function __construct(private ValidatorInterface $validator)
@@ -36,14 +38,14 @@ class RegistrationController extends AbstractController
     $errors = $this->validation($user);
 
     if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
-
       // hash du mot de passe
       $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+
       // suppression de la confirmation du mot de passe
       $user->setPasswordConfirm('');
 
       // si l'utilisateur n'envoie aucun fichier, on attribue un avatar par défaut
-      if ($_FILES['file']['error'] === 4) {
+      if (empty($_FILES) || (isset(($_FILES)) && $_FILES['file']['error'] === 4)) {
         $user->setAvatar('images/default_user.png');
         // sinon, on gère l'upload d'une image en avatar
       } else {
