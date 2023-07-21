@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35926e57d512cda38f28a14e0549f07b",
+    "content-hash": "74fec1918403e931f67bd6ea649c6008",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -5563,16 +5563,16 @@
         },
         {
             "name": "symfony/runtime",
-            "version": "v6.2.8",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/runtime.git",
-                "reference": "f8b0751b33888329be8f8f0481bb81d279ec4157"
+                "reference": "8e83b5d8e0ace903e1a91dedfe08a84ed2a54b0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/runtime/zipball/f8b0751b33888329be8f8f0481bb81d279ec4157",
-                "reference": "f8b0751b33888329be8f8f0481bb81d279ec4157",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/8e83b5d8e0ace903e1a91dedfe08a84ed2a54b0d",
+                "reference": "8e83b5d8e0ace903e1a91dedfe08a84ed2a54b0d",
                 "shasum": ""
             },
             "require": {
@@ -5584,7 +5584,7 @@
             },
             "require-dev": {
                 "composer/composer": "^1.0.2|^2.0",
-                "symfony/console": "^5.4|^6.0",
+                "symfony/console": "^5.4.9|^6.0.9",
                 "symfony/dotenv": "^5.4|^6.0",
                 "symfony/http-foundation": "^5.4|^6.0",
                 "symfony/http-kernel": "^5.4|^6.0"
@@ -5622,7 +5622,7 @@
                 "runtime"
             ],
             "support": {
-                "source": "https://github.com/symfony/runtime/tree/v6.2.8"
+                "source": "https://github.com/symfony/runtime/tree/v6.3.1"
             },
             "funding": [
                 {
@@ -5638,7 +5638,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-14T15:48:35+00:00"
+            "time": "2023-06-21T12:08:28+00:00"
         },
         {
             "name": "symfony/security-bundle",
@@ -9860,5 +9860,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

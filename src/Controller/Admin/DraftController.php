@@ -18,7 +18,7 @@ class DraftController extends AbstractController
   {
     /** @var ReviewRepository */
     $reviewRepo = $em->getRepository(Review::class);
-    $drafts = $reviewRepo->findBy(['status' => 'draft']);
+    $drafts = $reviewRepo->findBy(['status' => 'draft'], ['createdAt' => 'DESC']);
 
     return $this->render('admin/reviews.html.twig', [
       'reviews' => $drafts

@@ -121,3 +121,8 @@
   height: 25px;
   display: flex;
 }
+
+.badge-platform {
+  display: block;
+  font-size: 0.8em;
+}

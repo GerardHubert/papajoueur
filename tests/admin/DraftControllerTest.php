@@ -21,7 +21,7 @@ class DraftControllerTest extends WebTestCase
         $client = static::createClient();
         /** @var UserRepository */
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $user = $userRepository->findOneByEmail('test-user20@papunit.fr');
+        $user = $userRepository->findOneByEmail('user0@papajoueur.fr');
 
         $client->loginUser($user);
         $client->request('GET', '/admin/drafts');

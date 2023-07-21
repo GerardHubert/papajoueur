@@ -25,7 +25,7 @@ class ReviewController extends AbstractController
   {
     /** @var ReviewRepository */
     $reviewRepo = $em->getRepository(Review::class);
-    $reviews = $reviewRepo->findBy(['status' => 'published']);
+    $reviews = $reviewRepo->findBy(['status' => 'published'], ['createdAt' => 'DESC']);
 
     return $this->render('admin/reviews.html.twig', [
       'reviews' => $reviews
@@ -105,9 +105,8 @@ class ReviewController extends AbstractController
         ->setReleasedAt(new DateTime($result['released']))
         ->setDevelopers($result['developers'])
         ->setPlatforms($result['platforms']);
-      if ($result['background_image'] === null) {
-        $game->setImage('images/review_default.jpg');
-      };
+      $result['background_image'] === null ? $game->setImage('images/review_default.jpg') : $game->setImage($result['background_image']);
+      
       $em->persist($game);
       $em->flush();
     }
