@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Changer d'avatar
+{% endblock %}
+
+{% block body %}
+	<section class="avatar-change-section">
+		<h1 class="avatar-change-section-title">Modifier mon avatar</h1>
+		<form method='POST' action="#" class="avatar-form" enctype="multipart/form-data">
+			<label for="avatar-change" class="avatar-form-label">Changer mon image de profil</label>
+			<input type="file" name="avatar-change" id="avatar-change" class="avatar-change-input">
+			<input type="submit" value="modifier" class="avatar-change-submit">
+		</form>
+	</section>
+{% endblock %}

@@ -33,7 +33,8 @@ class AppFixtures extends Fixture
         $admin->setEmail("admin@papajoueur.fr")
             ->setPassword($this->hasher->hashPassword($admin, 'password'))
             ->setPasswordConfirm($admin->getPassword())
-            ->setRoles(['ROLE_ADMIN']);
+            ->setRoles(['ROLE_ADMIN'])
+            ->setAvatar("https://picsum.photos/100");
         $manager->persist($admin);
         dump('admin créé');
 
@@ -42,7 +43,8 @@ class AppFixtures extends Fixture
             $user->setEmail("user" . $i . "@papajoueur.fr")
                 ->setPassword($this->hasher->hashPassword($user, 'password'))
                 ->setPasswordConfirm($user->getPassword())
-                ->setRoles(['ROLE_USER']);
+                ->setRoles(['ROLE_USER'])
+                ->setAvatar("https://picsum.photos/100");
             $manager->persist($user);
             dump('user créé : ' . $user->getEmail());
         }

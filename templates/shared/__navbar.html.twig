@@ -42,8 +42,8 @@
 						<span>se connecter</span>
 					</a>
 				{% else %}
-					<a class='navbar-avatar-wrapper' href="#" title="Modifier mon avatar">
-						<img class='navbar-user-avatar' src="{{app.user.avatar}}" alt="user avatar">
+					<a class='navbar-avatar-wrapper' href="{{ path("app_avatar_change", {'id': app.user.id}) }}" title="Modifier mon avatar">
+						<img class='navbar-user-avatar' src="/{{app.user.avatar}}" alt="user avatar">
 					</a>
 					<a class="nav-item nav-item-logout" href="{{path('app_logout')}}" title="Se déconnecter">
 						<i class="fa-solid fa-right-from-bracket"></i>

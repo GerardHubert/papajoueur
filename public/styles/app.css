@@ -12,6 +12,7 @@
 @import "/styles/one_review.css";
 @import "/styles/home.css";
 @import "/styles/error403.css";
+@import "/styles/avatar_change.css";
 
 body {
   margin: 0;
