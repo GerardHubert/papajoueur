@@ -73,7 +73,7 @@
 				{% if app.user == null %}
 					<p class="connect-to-comment-message">Connectez-vous pour pouvoir laisser un commentaire</p>
 				{% else %}
-					{% include "shared/__comment_form.html.twig" %}
+					{% include "shared/__comment_form.html.twig" with {'review': review} %}
 				{% endif %}
 			</header>
 			{% for comment in review.comments %}
