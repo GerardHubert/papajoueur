@@ -1,0 +1,8 @@
+<form method='POST' action="#" class="comment-form">
+	<div class="comment-row">
+		<label for="comment" class="comment-label">Laisser un commentaire</label>
+		<textarea name="comment" id="comment" cols="30" rows="10" class="comment-input"></textarea>
+	</div>
+	<input type="hidden" name="new-comment-token" value={{ csrf_token('new-comment-token') }}>
+	<input class='comment-form-submit' type="submit" value="valider">
+</form>

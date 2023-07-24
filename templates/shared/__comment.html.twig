@@ -1,0 +1,21 @@
+<div class="comment-wrapper">
+	<header class="comment-header">
+		<img src="{{ comment.author.avatar }}" alt="avatar de l'auteur" class="comment-avatar">
+		<div class="comment-metadata">
+			<span class='comment-author'>{{ comment.author.email }}</span>
+			<span class='comment-date'>{{ comment.createdAt|date('d M. Y - H:i', "Europe/Paris") }}</span>
+		</div>
+	</header>
+	<div class="comment-content">{{ comment.content }}</div>
+	<footer class="comment-footer">
+		<div class="comment-likes">
+			<i class="fa-solid fa-heart"></i>
+			0
+		</div>
+		<span>|</span>
+		<div class="comment-dislikes">
+			<i class="fa-solid fa-heart-crack"></i>
+			0
+		</div>
+	</footer>
+</div>

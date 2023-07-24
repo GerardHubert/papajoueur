@@ -67,5 +67,19 @@
 				</div>
 			</aside>
 		</div>
+		<section class="comment-section">
+			<header class="comment-section-header">
+				<h2 class="comment-section-title">commentaires</h2>
+				{% if app.user == null %}
+					<p class="connect-to-comment-message">Connectez-vous pour pouvoir laisser un commentaire</p>
+				{% else %}
+					{% include "shared/__comment_form.html.twig" %}
+				{% endif %}
+			</header>
+			{% for comment in review.comments %}
+				{% include "shared/__comment.html.twig" with {'comment': comment} %}
+			{% endfor %}
+		</section>
 	</section>
+
 {% endblock %}

@@ -167,3 +167,144 @@
 .review-bottom-bad>ul>li {
   margin-bottom: 5px
 }
+
+.comment-section {
+  width: 1200px;
+  margin-top: 25px;
+}
+
+.comment-section-title {
+  display: flex;
+  justify-content: center;
+}
+
+.connect-to-comment-message {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgba(20, 42, 59, 0.8);
+  color: white;
+  font-weight: bold;
+}
+
+.comment-wrapper {
+  margin-bottom: 25px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(12, 176, 74, 0.8);
+}
+
+.comment-header,
+.comment-metadata {
+  display: flex;
+}
+
+.comment-metadata {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comment-author,
+.comment-date {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.comment-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-footer,
+.comment-likes,
+.comment-dislikes {
+  display: flex;
+}
+
+.comment-footer,
+.comment-content {
+  margin-top: 10px;
+}
+
+.comment-footer {
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.comment-likes,
+.comment-dislikes {
+  width: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-likes:hover,
+.comment-dislikes:hover {
+  cursor: pointer;
+}
+
+.comment-form {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  background-color: rgba(20, 42, 59, 0.8);
+}
+
+.comment-row {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  align-items: center;
+}
+
+.comment-label,
+.comment-input,
+.comment-form-submit {
+  height: 40%
+}
+
+.comment-label {
+  width: 20%;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}
+
+.comment-input {
+  resize: none;
+  width: 80%;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+
+}
+
+.comment-form-submit {
+  width: 10%;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  outline: none;
+  border: 0;
+}
+
+.comment-form-submit:hover {
+  cursor: pointer;
+}

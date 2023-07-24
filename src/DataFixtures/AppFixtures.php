@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Comment;
 use DateTime;
 use Faker;
 use App\Entity\Game;
@@ -26,9 +27,10 @@ class AppFixtures extends Fixture
     {
         /** @var Faker\Generator */
         $faker = Faker\Factory::create();
+        $users = [];
+        $reviews = [];
 
-        // $product = new Product();
-        // $manager->persist($product);
+        // création d'un administrateur
         $admin = new User();
         $admin->setEmail("admin@papajoueur.fr")
             ->setPassword($this->hasher->hashPassword($admin, 'password'))
@@ -36,8 +38,10 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_ADMIN'])
             ->setAvatar("https://picsum.photos/100");
         $manager->persist($admin);
-        dump('admin créé');
+        array_push($users, $admin);
+        dump('admin créé : ' . $admin->getEmail());
 
+        // création de 10 utilisateurs avec le status user
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setEmail("user" . $i . "@papajoueur.fr")
@@ -46,8 +50,9 @@ class AppFixtures extends Fixture
                 ->setRoles(['ROLE_USER'])
                 ->setAvatar("https://picsum.photos/100");
             $manager->persist($user);
-            dump('user créé : ' . $user->getEmail());
+            array_push($users, $user);
         }
+        dump('10 USERS CREES');
 
         $key = $_ENV['RAWG_API_KEY'];
         /** @var GameRepository */
@@ -56,7 +61,9 @@ class AppFixtures extends Fixture
         /** @var UserRepository */
         $userRepo = $manager->getRepository(User::class);
 
+        // création des reviews
         for ($i = 0; $i < 30; $i++) {
+            // on récupère d'abord des jeux aléatoirement avec une plage d'id entre 2000 et 8000
             $randomInt = rand(2000, 8000);
             $query = $this->queryService->findById($randomInt, $key);
             $result = json_decode($query['game'], true);
@@ -76,6 +83,7 @@ class AppFixtures extends Fixture
                 continue;
             }
 
+            // si l'api nous renvoie bien un jeu, on enregistre le jeu et on y associe une review
             if ($query['game'] !== false && array_key_exists('id', $result) && $gameRepo->findOneBy(['apiId' => $result['id']]) === null) {
                 $game = new Game();
                 $game->setApiId($result['id'])
@@ -86,7 +94,6 @@ class AppFixtures extends Fixture
                     ->setPlatforms($result['platforms']);
                 $result['background_image'] === null ? $game->setImage('/images/review_default.jpg') : $game->setImage($result['background_image']);
                 $manager->persist($game);
-                dump('jeu créé !: ' . $game->getName());
 
                 $review = new Review;
                 $review->setApiGameId($game->getApiId())
@@ -99,8 +106,25 @@ class AppFixtures extends Fixture
                     ->setSummary($faker->text(25));
 
                 $manager->persist($review);
-                dump('review créée!: ' . $review->getTitle());
+                array_push($reviews, $review);
             }
+        }
+        dump('30 JEUX ET 30 REVIEWS CREES');
+
+        foreach ($reviews as $review) {
+            // pour chaque nouvellle review, on ajoute 5 commentaires
+            for ($i = 0; $i < 5; $i++) {
+                // choisir un utilisateur au hasard pour en faire l'auteur
+                $randomUser = $users[array_rand($users, 1)];
+
+                $comment = new Comment;
+                $comment->setContent($faker->text(150))
+                    ->setAuthor($randomUser)
+                    ->setCreatedAt($faker->dateTime('now'))
+                    ->setReview($review);
+                $manager->persist($comment);
+            }
+            dump('5 COMMENTAIRES CREES POUR 1 REVIEW : ' . $review->getId());
         }
 
         $manager->flush();
