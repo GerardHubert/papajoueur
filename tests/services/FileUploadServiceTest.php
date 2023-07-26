@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Tests\services;
+namespace App\Tests\Services;
 
 use App\Services\FileUploadService;
 use Exception;

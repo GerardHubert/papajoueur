@@ -193,7 +193,8 @@
   margin-bottom: 25px;
   padding: 10px;
   border-radius: 5px;
-  background-color: rgba(12, 176, 74, 0.8);
+  /* background-color: rgba(12, 176, 74, 0.8); */
+  background-color: rgb(36, 118, 255, 1);
 }
 
 .comment-header,

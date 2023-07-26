@@ -26,15 +26,16 @@ class CommentController extends AbstractController
     $user = $manager->getRepository(User::class)->find($userId);
     $review = $manager->getRepository(Review::class)->find($reviewId);
 
-    // vérifier le token csrf
+    // vérifier le token csrf et si un utilisateur est bien connecté
     $submittedToken = $request->request->get('comment-token');
-    if (
-      $this->isCsrfTokenValid('new-comment-token', $submittedToken) === false
-      || $user === null
-      || $review === null
-    ) {
+    if ($user === null || $review === null) {
+      $this->addFlash('error', 'Une erreur est survenue: utilisateur ou review non trouvé');
+      return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId], 303);
+    }
+
+    if ($this->isCsrfTokenValid('new-comment-token', $submittedToken) === false) {
       $this->addFlash('error', 'Une erreur est survenue...');
-      return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId]);
+      return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId], 303);
     }
 
     // nettoyer l'input

@@ -106,7 +106,7 @@ class ReviewController extends AbstractController
         ->setDevelopers($result['developers'])
         ->setPlatforms($result['platforms']);
       $result['background_image'] === null ? $game->setImage('images/review_default.jpg') : $game->setImage($result['background_image']);
-      
+
       $em->persist($game);
       $em->flush();
     }

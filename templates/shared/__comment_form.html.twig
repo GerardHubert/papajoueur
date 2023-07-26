@@ -1,4 +1,4 @@
-<form method='POST' action="{{ path('app_comment_add', {'userId': app.user.id, 'reviewId': review.id}) }}" class="comment-form">
+<form method='POST' name='comment_form' action="{{ path('app_comment_add', {'userId': app.user.id, 'reviewId': review.id}) }}" class="comment-form">
 	<div class="comment-row">
 		<label for="comment" class="comment-label">Laisser un commentaire</label>
 		<textarea name="comment" id="comment" cols="30" rows="10" class="comment-input"></textarea>

@@ -89,7 +89,7 @@ class ReviewControllerTest extends WebTestCase
         }
 
         // choisir un nombre de la liste finale
-        return array_rand($randomInt, 1);
+        return $randomInt[array_rand($randomInt, 1)];
     }
 
     public function testRedirectionIfNoUserLogged(): void
@@ -149,6 +149,7 @@ class ReviewControllerTest extends WebTestCase
 
         // on tente d'ajouter un jeu qui n'existe pas déjà en bdd
         $randomApiId = $this->generateRandomApiId();
+
         $crawler = $client->request('GET', '/admin/review/new/' . $randomApiId);
         $newGame = $gameRepo->findOneBy(['apiId' => $randomApiId]);
 
@@ -216,7 +217,6 @@ class ReviewControllerTest extends WebTestCase
 
         // select the button
         $button = $crawler->selectButton('Enregistrer le brouillon');
-
         // retrieve the Form object for the form belonging to this button
         $form = $button->form();
 
@@ -256,11 +256,11 @@ class ReviewControllerTest extends WebTestCase
         /** @var ReviewRepository */
         $reviewRepo = static::getContainer()->get(ReviewRepository::class);
         $reviews = $reviewRepo->findAll();
-        $randomReview = array_rand($reviews, 1);
+        $randomReview = $reviews[array_rand($reviews, 1)];
 
-        $client->request('GET', '/admin/review/delete/' . $reviews[$randomReview]->getId());
+        $client->request('GET', '/admin/review/delete/' . $randomReview->getId());
 
         $newReviewsList = $reviewRepo->findAll();
-        $this->assertNotContains($reviews[$randomReview], $newReviewsList, 'la review doit être supprimée');
+        $this->assertNotContains($randomReview, $newReviewsList, 'la review doit être supprimée');
     }
 }

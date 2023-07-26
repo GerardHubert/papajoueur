@@ -6,7 +6,7 @@
 			<span class='comment-date'>{{ comment.createdAt|date('d M. Y - H:i', "Europe/Paris") }}</span>
 		</div>
 	</header>
-	<div class="comment-content">{{ comment.content }}</div>
+	<div class="comment-content">{{ comment.content|raw }}</div>
 	<footer class="comment-footer">
 		<div class="comment-likes">
 			<i class="fa-solid fa-heart"></i>
