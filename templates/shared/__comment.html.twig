@@ -1,6 +1,6 @@
-<div class="comment-wrapper">
+<div id="comment-{{ comment.id }}" class="comment-wrapper">
 	<header class="comment-header">
-		<img src="{{ comment.author.avatar }}" alt="avatar de l'auteur" class="comment-avatar">
+		<img src="/{{ comment.author.avatar }}" alt="avatar de l'auteur" class="comment-avatar">
 		<div class="comment-metadata">
 			<span class='comment-author'>{{ comment.author.email }}</span>
 			<span class='comment-date'>{{ comment.createdAt|date('d M. Y - H:i', "Europe/Paris") }}</span>
@@ -9,13 +9,33 @@
 	<div class="comment-content">{{ comment.content|raw }}</div>
 	<footer class="comment-footer">
 		<div class="comment-likes">
-			<i class="fa-solid fa-heart"></i>
-			0
+			<a href="{{ path('app_comment_feeling', {'id': comment.id, 'action': 'like'}) }}" title="J'kiffe">
+				<i class="fa-solid fa-heart"></i>
+			</a>
+			{{ comment.likes }}
 		</div>
-		<span>|</span>
+		<span class='comment-footer-separator'>|</span>
 		<div class="comment-dislikes">
-			<i class="fa-solid fa-heart-crack"></i>
-			0
+			<a href="{{ path('app_comment_feeling', {'id': comment.id, 'action': 'dislike'}) }}" title="J'kiffe pas">
+				<i class="fa-solid fa-heart-crack"></i>
+			</a>
+			{{ comment.dislikes }}
+		</div>
+		<span class='comment-footer-separator'>|</span>
+		<div class="comment-report">
+			{% if comment.reported == false and comment.reported != null %}
+				<a href="{{ path('app_comment_report', {'id': comment.id}) }}" title="Signaler ce commentaire">
+					<i class="fa-solid fa-flag"></i>
+				</a>
+			{% endif %}
+			{% if comment.reported == true %}
+				<i class="fa-solid fa-spinner"></i>
+				<span class='reported-message'>Modération en cours...</span>
+			{% endif %}
+			{% if comment.reported == null %}
+				<i class="fa-solid fa-check"></i>
+				<span class='reported-message allowed-comment'>Commentaire validé</span>
+			{% endif %}
 		</div>
 	</footer>
 </div>

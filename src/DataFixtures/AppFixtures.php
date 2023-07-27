@@ -98,12 +98,12 @@ class AppFixtures extends Fixture
                 $review = new Review;
                 $review->setApiGameId($game->getApiId())
                     ->setAuthor($admin)
-                    ->setContent($faker->paragraphs(7, true))
+                    ->setContent($faker->paragraphs(20, true))
                     ->setCreatedAt($faker->dateTime())
                     ->setGame($game)
                     ->setStatus('published')
-                    ->setTitle($faker->text(15))
-                    ->setSummary($faker->text(25));
+                    ->setTitle($faker->text(150))
+                    ->setSummary($faker->text(500));
 
                 $manager->persist($review);
                 array_push($reviews, $review);
@@ -121,7 +121,10 @@ class AppFixtures extends Fixture
                 $comment->setContent($faker->text(150))
                     ->setAuthor($randomUser)
                     ->setCreatedAt($faker->dateTime('now'))
-                    ->setReview($review);
+                    ->setReview($review)
+                    ->setLikes(0)
+                    ->setDislikes(0)
+                    ->setReported(false);
                 $manager->persist($comment);
             }
             dump('5 COMMENTAIRES CREES POUR 1 REVIEW : ' . $review->getId());

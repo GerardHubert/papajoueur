@@ -17,19 +17,23 @@
 					{% if role == 'ROLE_ADMIN' %}
 						<a href="{{path('app_admin_reviews')}}" class="nav-item">
 							<i class="fa-solid fa-screwdriver-wrench"></i>
-							<span>liste reviews</span>
+							<span>reviews</span>
 						</a>
 						<a href="{{path('app_admin_drafts')}}" class="nav-item">
 							<i class="fa-solid fa-screwdriver-wrench"></i>
-							<span>liste brouillons</span>
+							<span>brouillons</span>
 						</a>
 						<a href="{{ path('app_admin_game_search') }}" class="nav-item">
 							<i class="fa-solid fa-screwdriver-wrench"></i>
 							<span>nouvelle review</span>
 						</a>
-						<a href="#" class="nav-item">
+						<a href="{{ path('app_admin_comments') }}" class="nav-item">
 							<i class="fa-solid fa-comment"></i>
-							<span>modération</span>
+							<span>commentaires</span>
+						</a>
+						<a href="{{ path('app_admin_comments_reported') }}" class="nav-item">
+							<i class="fa-solid fa-comment"></i>
+							<span>à modérer</span>
 						</a>
 					{% endif %}
 				{% endfor %}

@@ -35,7 +35,7 @@ class Comment
     private ?int $dislikes = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $reported = null;
+    private ?bool $reported = false;
 
     public function getId(): ?int
     {

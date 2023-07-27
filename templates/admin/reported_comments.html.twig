@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Papajoueur - Admin - Comments
+{% endblock %}
+
+{% block body %}
+	<section class="comments-section">
+		<h1 class='comments-section-title'>espace admin : commentaires signalés, à modérer</h1>
+		<table class="comments-table">
+			<thead class='comments-table-head'>
+				<tr>
+					<th>id</th>
+					<th>auteur</th>
+					<th>commentaire</th>
+					<th>likes</th>
+					<th>dislikes</th>
+					<th>signalé ?</th>
+					<th colspan='2'>action</th>
+				</tr>
+			</thead>
+			<tbody class='comments-table-body'>
+				{% for comment in comments %}
+					<tr class='comments-table-row'>
+						<td class='comment-id'>{{ comment.id }}</td>
+						<td class='comment-list-author'>{{ comment.author.email }}</td>
+						<td class='comment-review-title'>{{ comment.content }}</td>
+						<td class='comment-list-likes'>{{ comment.likes }}</td>
+						<td class='comment-list-dislikes'>{{ comment.dislikes }}</td>
+						<td class='comment-reported'>
+							{% if comment.reported == true %}
+								<i class="fa-solid fa-circle-exclamation"></i>
+							{% endif %}
+						</td>
+						<td class='comment-delete'>
+							<a href="{{ path('app_admin_comment_delete', {'id': comment.id}) }}">Supprimer</a>
+						</td>
+						<td class='comment-ok'>
+							<a href="{{ path('app_admin_comment_allow', {'id': comment.id}) }}">Laisser</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

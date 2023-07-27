@@ -8,10 +8,8 @@ use App\Entity\User;
 use App\Entity\Review;
 use App\Entity\Comment;
 use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,5 +53,56 @@ class CommentController extends AbstractController
     $em->flush();
 
     return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId]);
+  }
+
+  #[Route('/comment/feeling/{id}', name: 'app_comment_feeling')]
+  public function handleLikes(int $id, EntityManagerInterface $manager, Request $request): Response
+  {
+    // obtenir la route pour définir l'action (like ou dislike)
+    $action = $request->query->get('action');
+
+    /** @var Comment */
+    $comment = $manager->getRepository(Comment::class)->find($id);
+    $review = $comment->getReview();
+
+    if ($comment === null) {
+      $this->addFlash('error', "Ce commentaire n'existe pas");
+      return $this->redirectToRoute('app_review_show_one', [
+        'id' => $review->getId()
+      ]);
+    }
+
+    if ($action === 'like') {
+      $comment->setLikes($comment->getLikes() + 1);
+    };
+
+    if ($action === 'dislike') {
+      $comment->setDislikes($comment->getDislikes() + 1);
+    }
+
+    $manager->persist($comment);
+    $manager->flush();
+
+    return $this->redirect($this->generateUrl('app_review_show_one', ['id' => $review->getId()]) . "#comment-" . $comment->getId());
+  }
+
+  #[Route('/comment/report/{id}', name: 'app_comment_report')]
+  public function handleReport(int $id, EntityManagerInterface $manager): Response
+  {
+    $comment = $manager->getRepository(Comment::class)->find($id);
+    $review = $comment->getReview();
+
+    if ($comment === null) {
+      $this->addFlash('error', "Ce commentaire n'existe pas");
+      return $this->redirectToRoute('app_review_show_one', [
+        'id' => $review->getId()
+      ]);
+    }
+
+    $comment->setReported(true);
+    $manager->persist($comment);
+    $manager->flush();
+
+    return $this->redirect($this->generateUrl('app_review_show_one', ['id' => $review->getId()]) . '#comment-' . $comment->getId());
   }
 }

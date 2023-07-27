@@ -13,6 +13,7 @@
 @import "/styles/home.css";
 @import "/styles/error403.css";
 @import "/styles/avatar_change.css";
+@import "/styles/admin/comments.css";
 
 body {
   margin: 0;

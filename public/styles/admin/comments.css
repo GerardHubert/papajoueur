@@ -1,0 +1,58 @@
+.comments-section {
+  width: 100%;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comments-table {
+  width: 95%;
+}
+
+.comments-table-head {
+  background-color: #2476ff;
+  color: white;
+}
+
+.comments-table-row td {
+  text-align: center;
+}
+
+.comment-id,
+.comment-list-likes,
+.comment-list-dislikes {
+  width: 5%;
+}
+
+.comment-list-author {
+  width: 15%;
+}
+
+.comment-review-title {
+  width: 40%;
+}
+
+.comment-reported {
+  width: 8%;
+}
+
+.comment-delete,
+.comment-ok {
+  width: 10%;
+}
+
+.comments-table-row:nth-child(odd) {
+  background-color: rgba(20, 42, 59, 0.4);
+}
+
+.comment-delete a,
+.comment-ok a {
+  text-decoration: none;
+  color: black
+}
+
+.comment-delete a:hover,
+.comment-ok a:hover {
+  cursor: pointer;
+}
