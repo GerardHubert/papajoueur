@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\Comment;
 use App\Repository\CommentRepository;
 use App\Repository\ReviewRepository;
 use App\Repository\UserRepository;
@@ -21,6 +22,14 @@ class CommentTest extends WebTestCase
         /** @var ReviewRepository */
         $reviewRepo = static::getContainer()->get(ReviewRepository::class);
         return $reviewRepo->findAll();
+    }
+
+    public function getRandomComment(): Comment
+    {
+        $comments = static::getContainer()->get(CommentRepository::class)->findAll();
+        $randomComment = $comments[array_rand($comments, 1)];
+
+        return $randomComment;
     }
 
     public function testRedirectionIfNoUserIsFound(): void
@@ -116,5 +125,49 @@ class CommentTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(302, 'le commentaire a bien été enregistré');
         $this->assertTrue(count($initialCommentsList) < count($updatedCommentsList));
+    }
+
+    public function testLikeIsSaved(): void
+    {
+        $client = static::createClient();
+
+        $randomComment = $this->getRandomComment();
+        $initialLikes = $randomComment->getLikes();
+
+        $client->request('GET', '/comment/feeling/' . $randomComment->getId() . '?action=like');
+
+        $updatedLikes = $randomComment->getLikes();
+        $this->assertTrue($initialLikes < $updatedLikes);
+    }
+
+    public function testDislikeIsSaved(): void
+    {
+        $client = static::createClient();
+
+        $randomComment = $this->getRandomComment();
+        $initialDislikes = $randomComment->getDislikes();
+
+        $client->request('GET', '/comment/feeling/' . $randomComment->getId() . '?action=dislike');
+
+        $updatedDislikes = $randomComment->getDislikes();
+        $this->assertTrue($initialDislikes < $updatedDislikes);
+    }
+
+    public function testCommentReport(): void
+    {
+        $client = static::createClient();
+        $commentRepo = static::getContainer()->get(CommentRepository::class);
+        $comments = $commentRepo->findAll();
+
+        foreach ($comments as $key => $comment) {
+            if ($comment->isReported() || $comment->isReported() === null) {
+                array_splice($comments, $key, 1);
+            }
+        }
+        $randomComment = $comments[array_rand($comments, 1)];
+
+        $client->request('GET', '/comment/report/' . $randomComment->getId());
+
+        $this->assertTrue($commentRepo->find($randomComment->getId())->isReported() === true);
     }
 }
