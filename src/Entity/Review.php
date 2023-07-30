@@ -53,6 +53,9 @@ class Review
     #[ORM\OneToMany(mappedBy: 'review', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column(length: 255)]
+    private ?string $video = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -221,6 +224,18 @@ class Review
                 $comment->setReview(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(string $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }
