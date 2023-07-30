@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use DateTime;
+use Exception;
 use App\Entity\Game;
 use App\Entity\Review;
 use App\Form\ReviewFormType;
-use App\Repository\GameRepository;
-use App\Repository\ReviewRepository;
 use App\Services\QueryService;
-use DateTime;
+use App\Repository\GameRepository;
+use App\Services\FileUploadService;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReviewController extends AbstractController
 {
@@ -204,5 +207,62 @@ class ReviewController extends AbstractController
     $em->flush();
     $this->addFlash('success', 'La review a bien été supprimée');
     return $this->redirectToRoute('app_admin_reviews');
+  }
+
+  #[Route('/admin/review/upload/image', name: 'app_admin_review_image')]
+  public function reviewImageHandler(Request $request): Response
+  {
+    $imageFolder = "uploads/reviews_images/";
+    $file = $_FILES['file'];
+
+    // définition de la taille autorisée
+    $maxSize = 2000000;
+    // définition des extensions autorisées
+    $extensions = ['jpg', 'jpeg', 'png', 'bmp'];
+    // définition des types autorisés
+    $types = ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp'];
+
+    // vérification que l'image a bien été uploadée
+    // si rien dans le dossier temporaire
+    // if (!is_uploaded_file($file['tmp_name'])) {
+    // vérification de la taille
+    if ($file['error'] === 1 || $file['error'] === 2 || $file['size'] > $maxSize) {
+      throw new Exception("Le fichier est trop volumineux (taille max 2Mo)");
+    }
+    if ($file['error'] > 0 && $file['error'] !== 1 && $file['error'] !== 2) {
+      throw new Exception("un problème est survenu lors de l'upload. Error = " . $file['error']);
+    }
+
+    // vérification de double extensions
+    $testFileName = explode('.', strtolower($file['name']));
+    if (count($testFileName) !== 2) {
+      throw new Exception("Danger : risque de double extension !");
+    }
+
+    // vérification que l'extension est autorisée
+    if (!in_array($testFileName[1], $extensions)) {
+      throw new Exception("Cette extension n'est pas autorisée.");
+      return false;
+    }
+
+    // vérification du type
+    if (!in_array($file['type'], $types)) {
+      throw new Exception("Le type n'est pas autorisé");
+    }
+
+    // si tous les tests sont passés, on attribue un nom unique à l'image
+    $targetName = uniqid('review_') . '.' . $testFileName[1];
+    $fullName = $imageFolder . $targetName;
+
+    // puis on peut l'uploader
+    if (move_uploaded_file($file['tmp_name'], $fullName) === false) {
+      throw new Exception("Le fichier n'a pas pu être uploadé, merci de réessayer");
+    } else {
+      return new JsonResponse(['location' => '/' . $fullName]);
+    };
+
+    // Respond to the successful upload with JSON.
+    // Use a location key to specify the path to the saved image resource.
+    // { location : '/your/uploaded/image/file'}
   }
 }

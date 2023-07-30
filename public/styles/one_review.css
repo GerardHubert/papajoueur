@@ -72,6 +72,11 @@
   width: 100%;
 }
 
+.review-text img {
+  width: 100%;
+  height: 350px;
+}
+
 .youtube-player {
   height: 400px;
 }

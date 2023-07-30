@@ -1,5 +1,6 @@
 .games-search-section {
   width: 100%;
+  min-height: 92vh;
   display: flex;
   justify-content: space-between;
 }

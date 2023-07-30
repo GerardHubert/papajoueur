@@ -7,7 +7,7 @@
 {% block javascripts %}
 	<script src="https://cdn.tiny.cloud/1/97xujt63v02pi5q8baozxw48t8ryhh838n540l6bholq34p2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
-		tinymce.init({selector: '#review-content'});
+		tinymce.init({selector: '#review-content', plugins: 'image', images_upload_url: '/admin/review/upload/image', toolbar: 'image'});
 tinymce.init({selector: '#new-review-good', plugins: 'lists', toolbar: 'numlist bullist'});
 tinymce.init({selector: '#new-review-bad', plugins: 'lists', toolbar: 'numlist bullist'});
 tinymce.init({selector: '#new-review-summary'});

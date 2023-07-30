@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Exception;
+use Symfony\Component\Routing\Annotation\Route;
 
 class FileUploadService
 {
