@@ -45,7 +45,7 @@ class ReviewControllerTest extends WebTestCase
     public function gameQuery(): array
     {
         self::bootKernel();
-        $game = QueryService::findById(388309, $_ENV['RAWG_API_KEY']);
+        $game = QueryService::findById($this->generateRandomApiId(), $_ENV['RAWG_API_KEY']);
         return $game;
     }
 
@@ -189,6 +189,7 @@ class ReviewControllerTest extends WebTestCase
         $form['new-review-summary'] = 'Ceci est une review publiée !';
         $form['game-api-id'] = $gameId;
         $form['new-review-opinion'] = '/images/smileys/bad.png';
+        $form['new-review-video'] = "https://youtu.be/VN3lWscnyD4";
 
         // submit the Form object
         $client->submit($form);
@@ -211,7 +212,7 @@ class ReviewControllerTest extends WebTestCase
         $initialReviews = $this->getReviews();
 
         $client->loginUser($this->getAdmin());
-        $gameId = $this->getRandomIdFromGameRepo();
+        $gameId = $this->generateRandomApiId();
 
         $crawler = $client->request('GET', '/admin/review/new/' . $gameId);
 
@@ -234,6 +235,7 @@ class ReviewControllerTest extends WebTestCase
         $form['new-review-summary'] = 'Ceci est une review au status de brouillon !';
         $form['game-api-id'] = $gameId;
         $form['new-review-opinion'] = '/images/smileys/bad.png';
+        $form['new-review-video'] = "https://youtu.be/VN3lWscnyD4";
 
         // submit the Form object
         $client->submit($form);
@@ -242,6 +244,7 @@ class ReviewControllerTest extends WebTestCase
         /** @var ReviewRepository */
         $reviewRepo = self::getContainer()->get(ReviewRepository::class);
         $newReview = $reviewRepo->findOneBy(['apiGameId' => $gameId]);
+
         $this->assertContains($newReview, $this->getReviews(), 'nouvelle review doit être enregistrée');
         // test if the new review has status published
         $this->assertSame('draft', $newReview->getStatus(), 'nouvelle review doit avoir le status brouillon');

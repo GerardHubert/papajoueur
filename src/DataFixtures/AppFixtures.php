@@ -103,7 +103,8 @@ class AppFixtures extends Fixture
                     ->setGame($game)
                     ->setStatus('published')
                     ->setTitle($faker->text(150))
-                    ->setSummary($faker->text(500));
+                    ->setSummary($faker->text(500))
+                    ->setVideo("https://youtu.be/VN3lWscnyD4");
 
                 $manager->persist($review);
                 array_push($reviews, $review);

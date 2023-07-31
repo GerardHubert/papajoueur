@@ -67,7 +67,7 @@ class CommentController extends AbstractController
     }
 
     if ($comment instanceof Comment) {
-      $comment->setReported(null);
+      $comment->setReported(false);
       $manager->persist($comment);
       $manager->flush();
       $this->addFlash('success', 'Le commentaire a été autorisé');

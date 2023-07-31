@@ -23,7 +23,7 @@
 		</div>
 		<span class='comment-footer-separator'>|</span>
 		<div class="comment-report">
-			{% if comment.reported == false and comment.reported != null %}
+			{% if comment.reported is same as null %}
 				<a href="{{ path('app_comment_report', {'id': comment.id}) }}" title="Signaler ce commentaire">
 					<i class="fa-solid fa-flag"></i>
 				</a>
@@ -32,7 +32,7 @@
 				<i class="fa-solid fa-spinner"></i>
 				<span class='reported-message'>Modération en cours...</span>
 			{% endif %}
-			{% if comment.reported == null %}
+			{% if comment.reported == false and comment.reported is not null %}
 				<i class="fa-solid fa-check"></i>
 				<span class='reported-message allowed-comment'>Commentaire validé</span>
 			{% endif %}

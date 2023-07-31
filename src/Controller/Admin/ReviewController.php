@@ -13,6 +13,7 @@ use App\Services\QueryService;
 use App\Repository\GameRepository;
 use App\Services\FileUploadService;
 use App\Repository\ReviewRepository;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -144,14 +145,15 @@ class ReviewController extends AbstractController
     $review->setApiGameId((int) $data['game-api-id'])
       ->setAuthor($this->getUser())
       ->setContent($data['review-content'])
-      ->setCreatedAt(new DateTime('now'))
+      ->setCreatedAt(new DateTime('now', new DateTimeZone('Europe/Paris')))
       ->setGame($game)
       ->setStatus($status)
       ->setTitle($data['new-review-title'])
       ->setGood($data['new-review-good'])
       ->setBad($data['new-review-bad'])
       ->setSummary($data['new-review-summary'])
-      ->setSmiley($data['new-review-opinion']);
+      ->setSmiley($data['new-review-opinion'])
+      ->setVideo($data['new-review-video']);
 
     $em->persist($review);
     $em->flush();
@@ -178,6 +180,7 @@ class ReviewController extends AbstractController
         ->setGood($data['new-review-good'])
         ->setBad($data['new-review-bad'])
         ->setSummary($data['new-review-summary'])
+        ->setVideo($data['new-review-video'])
         ->setSmiley($data['new-review-opinion']);
 
       // s'il s'agit d'un brouillon et qu'on  le publie
@@ -210,7 +213,7 @@ class ReviewController extends AbstractController
   }
 
   #[Route('/admin/review/upload/image', name: 'app_admin_review_image')]
-  public function reviewImageHandler(Request $request): Response
+  public function reviewImageHandler(): Response
   {
     $imageFolder = "uploads/reviews_images/";
     $file = $_FILES['file'];

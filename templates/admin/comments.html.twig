@@ -31,7 +31,7 @@
 							{% if comment.reported == true %}
 								<i class="fa-solid fa-circle-exclamation"></i>
 							{% endif %}
-							{% if comment.reported == false %}
+							{% if comment.reported is defined and comment.reported is not null and comment.reported == false %}
 								Validé
 							{% endif %}
 						</td>

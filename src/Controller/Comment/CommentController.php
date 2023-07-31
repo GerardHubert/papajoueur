@@ -47,12 +47,13 @@ class CommentController extends AbstractController
       ->setReview($review)
       ->setLikes(0)
       ->setDislikes(0)
-      ->setReported(false);
+      ->setReported(null);
 
     $em->persist($comment);
     $em->flush();
 
-    return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId]);
+    return $this->redirect($this->generateUrl('app_review_show_one', ['id' => $reviewId]) . '#comment-' . $comment->getId());
+    // return $this->redirectToRoute('app_review_show_one', ['id' => $reviewId]);
   }
 
   #[Route('/comment/feeling/{id}', name: 'app_comment_feeling')]

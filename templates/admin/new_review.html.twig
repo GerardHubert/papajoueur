@@ -29,6 +29,19 @@ tinymce.init({selector: '#new-review-summary'});
 						<input type="text" name="new-review-title" id="new-review-title" class="new-review-title">
 					</div>
 				</div>
+				<div class="new-review-row">
+					<label for="new-review-video" class="new-review-video-label">Id de la vidéo :
+					</label>
+					<input type="text" name="new-review-video" id="new-review-video" class="new-review-video">
+				</div>
+				<label class="new-review-opinion" for="new-review-opinion">avis (smiley)</label>
+				<select name="new-review-opinion" id="new-review-opinion" class="opinion-select">
+					<option value="/images/smileys/excellent.png">Excellent</option>
+					<option value="/images/smileys/good.png">Bien</option>
+					<option value="/images/smileys/bof.png">Moyen</option>
+					<option value="/images/smileys/bad.png">Mauvais</option>
+					<option value="/images/smileys/angry.png">A fuir !</option>
+				</select>
 				<div class="new-review-content">
 					<label for="review-content" class="new-review-content">Contenu</label>
 					<textarea name="review-content" id="review-content" cols="30" rows="10" class="review-content"></textarea>
@@ -49,14 +62,6 @@ tinymce.init({selector: '#new-review-summary'});
 				</div>
 				<input type="hidden" name="game-api-id" value="{{ game.apiId }}">
 				<input type="hidden" name="new-review-token" value="{{ csrf_token('new_review_token') }}">
-				<label class="new-review-opinion" for="new-review-opinion">avis (smiley)</label>
-				<select name="new-review-opinion" id="new-review-opinion" class="opinion-select">
-					<option value="/images/smileys/excellent.png">Excellent</option>
-					<option value="/images/smileys/good.png">Bien</option>
-					<option value="/images/smileys/bof.png">Moyen</option>
-					<option value="/images/smileys/bad.png">Mauvais</option>
-					<option value="/images/smileys/angry.png">A fuir !</option>
-				</select>
 				<div class="new-review-submit-container">
 					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId, 'action': 'draft'}) }}" class='new-review-draft'>Enregistrer le brouillon</button>
 					<button type="submit" formaction="{{ path('app_admin_review_add', {'gameId': game.apiId, 'action': 'publish'}) }}" class='new-review-publish'>Publier la review</button>

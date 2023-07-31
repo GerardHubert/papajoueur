@@ -29,6 +29,19 @@ tinymce.init({selector: '#new-review-summary'});
 						<input type="text" name="update-review-title" id="update-review-title" class="update-review-title" value='{{ review.title }}'>
 					</div>
 				</div>
+				<div class="new-review-row">
+					<label for="new-review-video" class="new-review-video-label">Id de la vidéo :
+					</label>
+					<input type="text" name="new-review-video" id="new-review-video" class="new-review-video" value="{{ review.video }}">
+				</div>
+				<label class="new-review-opinion" for="new-review-opinion">avis (smiley)</label>
+				<select name="new-review-opinion" id="new-review-opinion" class="opinion-select">
+					<option value="/images/smileys/excellent.png">Excellent</option>
+					<option value="/images/smileys/good.png">Bien</option>
+					<option value="/images/smileys/bof.png">Moyen</option>
+					<option value="/images/smileys/bad.png">Mauvais</option>
+					<option value="/images/smileys/angry.png">A fuir !</option>
+				</select>
 				<div class="update-review-content">
 					<label for="review-content" class="update-review-content">Contenu</label>
 					<textarea name="review-content" id="review-content" cols="30" rows="10" class="review-content">{{ review.content }}</textarea>
@@ -49,14 +62,6 @@ tinymce.init({selector: '#new-review-summary'});
 				</div>
 				<input type="hidden" name="game-api-id" value="{{ review.game.apiId }}">
 				<input type="hidden" name="update-review-token" value="{{ csrf_token('update_review_token') }}">
-				<label class="new-review-opinion" for="new-review-opinion">avis (smiley)</label>
-				<select name="new-review-opinion" id="new-review-opinion" class="opinion-select">
-					<option value="/images/smileys/excellent.png">Excellent</option>
-					<option value="/images/smileys/good.png">Bien</option>
-					<option value="/images/smileys/bof.png">Moyen</option>
-					<option value="/images/smileys/bad.png">Mauvais</option>
-					<option value="/images/smileys/angry.png">A fuir !</option>
-				</select>
 				<div class="update-review-submit-container">
 					<button type="submit" formaction='{{ path('app_admin_review_update', {'id': review.id}) }}' class='update-review-save'>Enregistrer les modifications</button>
 					{% if review.status == 'draft' %}
