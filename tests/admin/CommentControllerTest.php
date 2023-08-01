@@ -67,6 +67,6 @@ class CommentControllerTest extends WebTestCase
 
         $client->request('GET', '/admin/comment/allow/' . $comment->getId());
 
-        $this->assertNull($commentRepo->find($comment->getid())->isReported());
+        $this->assertFalse($commentRepo->find($comment->getid())->isReported());
     }
 }
